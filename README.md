@@ -1,6 +1,6 @@
-
-## Beadando_CSharp_26
 # Movie Processor
+
+*C# beadandó (Beadando_CSharp_26)*
 
 Egy egyszerű konzolos C# alkalmazás, amely filmeket tárol és dolgoz fel producer-consumer minta segítségével.
 
@@ -29,6 +29,7 @@ Kontroll;105;thriller, dark comedy
 A feladat 3 konkrét .NET eszköz (`ConcurrentQueue`, `AutoResetEvent`, `EventWaitHandle`) használatát írta elő, saját wrapper osztályokon keresztül (`OwnConcurrentQueue`, `OwnAutoResetEvent`, `OwnEventWaitHandle`).
 
 - **`ConcurrentQueue`** – mivel több szál is olvassa/írja ugyanazt a sort, ez teszi lehetővé a szálbiztos hozzáférést lock használata nélkül.
+- **`EventWaitHandle`** – az `OwnEventWaitHandle` az ősosztály, ami a várakozást, jelzést és lezárást (`EventWait`, `EventSet`, `EventClose`) egy helyen valósítja meg. Az `OwnAutoResetEvent` ebből öröklődik, mivel az `AutoResetEvent` maga is az `EventWaitHandle` leszármazottja, így a logikát nem kellett kétszer megírni.
 - **`AutoResetEvent`** – a producer (főszál) ezzel jelzi a consumernek (háttérszál), hogy van feldolgozandó film. Mivel csak egy consumer szál fut, minden jelzésnek pontosan egy ébresztést kell kiváltania, automatikus visszaállással — erre való az AutoResetEvent.
 
 A leállítás sorrendje is fontos: `Stop()` → `Join()` → `Close()`, hogy a consumer szál veszteség nélkül tudja befejezni a munkáját, mielőtt az erőforrások felszabadulnak.
